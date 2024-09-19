@@ -46,7 +46,7 @@ export default function TabsRoutes(){
             />
 
         <Tab.Screen
-            name="PALMEIRAS"
+            name="CITAÇÃO"
             color="black"
             component={Palmeiras}
             options={{

@@ -1,10 +1,30 @@
-import { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { Pressable, StyleSheet, Text, View, Animated } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function Home() {
   const [tempo, setTempo] = useState(0); 
   const [ativo, setAtivo] = useState(false);
+  const rotation = useRef(new Animated.Value(0)).current; 
+
+  const startRotation = () => {
+    Animated.timing(rotation, {
+      toValue: 1, 
+      duration: 1000, 
+      useNativeDriver: true,
+    }).start(() => {
+      rotation.setValue(0);
+    });
+  };
+
+  const rotateInterpolate = rotation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
+
+  const animatedStyle = {
+    transform: [{ rotate: rotateInterpolate }],
+  };
 
   useEffect(() => {
     let intervalo = null;
@@ -59,8 +79,13 @@ export default function Home() {
       <Ionicons name={ativo ? "pause-outline" : "pause"} size={45} color={"black"}/>
       </Pressable>
 
-      <Pressable style={styles.button} onPress={resetar}> 
-      <Ionicons name="sync-outline" size={45} color={"black"}/>
+      <Pressable style={styles.button}  onPress={() => {
+          resetar(); // Atualiza a citação
+          startRotation(); // Inicia a rotação
+        }}>
+        <Animated.View style={animatedStyle}>
+          <Ionicons name="sync" size={44} color={"black"} />
+        </Animated.View>
       </Pressable>
 
      </View>

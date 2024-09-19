@@ -1,38 +1,73 @@
 
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View, Animated} from 'react-native';
 import ConsumirApi from '../service/ConsumirApi';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import Traduzir from '../service/Traduzir';
+
 
 export default function Palmeiras() {
+  const [quote, setQuote] = useState("");
+  const [author, setAuthor] = useState("");
+  const apiKey = "3d67cb61-e50e-472a-9b8e-fb24f1a2f5de:fx";
+  const rotation = useRef(new Animated.Value(0)).current; 
 
-const [quote, setQuote] = useState("");
-const [author, setAuthor] = useState("");
+  const fetchQuote = async () => {
+    try {
+      const response = await ConsumirApi("https://stoic.tekloon.net/stoic-quote");
+      const originalQuote = response.data.quote;
+      setAuthor(response.data.author);
+      
+     // const translatedQuote = await Traduzir(originalQuote, apiKey);
+      setQuote(originalQuote);
+      
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-const fetchQuote = async () => {
-  try {
-    const response = await ConsumirApi("https://stoic.tekloon.net/stoic-quote");
-    setQuote(response.data.quote); 
-    setAuthor(response.data.author); 
+  const startRotation = () => {
+    Animated.timing(rotation, {
+      toValue: 1, 
+      duration: 1000, 
+      useNativeDriver: true,
+    }).start(() => {
+      rotation.setValue(0);
+    });
+  };
 
-  } catch (error) {
-    console.error(error);
-  }
-};
+  const rotateInterpolate = rotation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
 
-useEffect(() => {
-  fetchQuote();
-}, []);
+  const animatedStyle = {
+    transform: [{ rotate: rotateInterpolate }],
+  };
+
+
+  useEffect(() => {
+    fetchQuote();
+  }, []);
+
 
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{quote}</Text>
-      <Text style={styles.title}>{author}</Text>
 
-      <Pressable style={styles.button} onPress={fetchQuote}>
-       <Ionicons name="sync" size={44} color={"black"}/>
-        </Pressable>
+    <View style={styles.citacao}>
+      <Text style={styles.title}>"{quote}"</Text>
+      <Text style={styles.title}> - {author}</Text>
+    </View>
+    
+    <Pressable style={styles.button}  onPress={() => {
+          fetchQuote(); // Atualiza a citação
+          startRotation(); // Inicia a rotação
+        }}>
+        <Animated.View style={animatedStyle}>
+          <Ionicons name="sync" size={44} color={"black"} />
+        </Animated.View>
+      </Pressable>
         
     </View>
   );
@@ -46,16 +81,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    backgroundColor: 'red',
     fontSize: 22, 
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    
   },
   button: {
     paddingVertical: 12,
     paddingHorizontal: 32,
-    backgroundColor: 'red',
     position: "absolute",
     bottom: 0,
     margin: 80
   },
+  citacao: { 
+    position: "absolute",
+    margin: 50,
+    gap: 30,
+    
+  }
 });

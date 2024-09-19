@@ -1,11 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
-import { useState } from 'react';
+import { Button, Pressable, StyleSheet, Text, View, Animated } from 'react-native';
+import { useRef, useState } from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function Root() {
 
   const [count, setCount] = useState(0);
+  const rotation = useRef(new Animated.Value(3)).current; 
+
+  const startRotation = () => {
+    Animated.timing(rotation, {
+      toValue: 1, 
+      duration: 1000, 
+      useNativeDriver: true,
+    }).start(() => {
+      rotation.setValue(3);
+    });
+  };
+
+  const rotateInterpolate = rotation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
+
+  const animatedStyle = {
+    transform: [{ rotate: rotateInterpolate }],
+  };
 
   const increment = () => {
     setCount(count + 1);
@@ -38,10 +58,14 @@ export default function Root() {
       <Pressable onPress={increment} style={styles.screenBtn}></Pressable>
      </View>
 
-      <Pressable onPress={reset} style={styles.button} >
-       <Ionicons name="sync" size={70} color={"black"}/>
-        </Pressable>
-
+     <Pressable style={styles.button}  onPress={() => {
+          reset(); // Atualiza a citação
+          startRotation(); // Inicia a rotação
+        }}>
+        <Animated.View style={animatedStyle}>
+          <Ionicons name="sync" size={70} color={"black"} />
+        </Animated.View>
+      </Pressable>
 
       {/* <View style={styles.counter}>
   
