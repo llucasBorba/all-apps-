@@ -16,7 +16,14 @@ export default function TabsRoutes(){
             color="black"
             component={Home}
             options={{
-                tabBarIcon: () => <Ionicons name="timer-outline" size={22} color={"black"}/>
+                tabBarIcon: ({focused}) => (
+                <Ionicons 
+                name={focused ? "timer" : "timer-outline"} 
+                size={22} 
+                color={"black"} />),
+                tabBarInactiveTintColor: 'gray',
+                tabBarActiveTintColor: 'black'
+           
             }}
             />
 
@@ -25,7 +32,16 @@ export default function TabsRoutes(){
             color="blak"
             component={Test}
             options={{
-                tabBarIcon: () => <Ionicons name="restaurant-outline" size={22} color={"black"}/>
+                tabBarIcon: ({focused}) => (
+                    <Ionicons 
+                    name={focused ? "restaurant" : "restaurant-outline"} 
+                    size={22} 
+                    color={"black"} />),
+                    tabBarLabelStyle: ({ focused }) => ({
+                        fontWeight: focused ? 'bold' : 'normal',
+                    }),
+                    tabBarInactiveTintColor: 'gray',
+                    tabBarActiveTintColor: 'black'
             }}
             />
 
@@ -34,7 +50,17 @@ export default function TabsRoutes(){
             color="black"
             component={Palmeiras}
             options={{
-                tabBarIcon: () => <Ionicons name="sync" size={22} color={"black"}/>
+                tabBarIcon: ({focused}) => (
+                    <Ionicons 
+                    name={focused ? "bookmark" : "bookmark-outline"} 
+                    size={22} 
+                    color={"black"} />),
+                    tabBarLabelStyle: ({ focused }) => ({
+                        fontWeight: focused ? 'bold' : 'normal',
+                    }),
+                    tabBarInactiveTintColor: 'gray',
+                    tabBarActiveTintColor: 'black'
+
             }}
             />
 

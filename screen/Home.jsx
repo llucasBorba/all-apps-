@@ -34,10 +34,12 @@ export default function Home() {
   };
 
   const formatarTempo = (tempo) => {
-    const min = Math.floor((tempo % 60000) / 1000); // Converte o restante em segundos
-    const segundos = tempo % 1000; // O restante são milissegundos
-    return `${min}.${segundos}`;
+    const minutos = Math.floor(tempo / 60); 
+    const segundos = tempo % 60; 
+
+    return `${minutos.toString().padStart(2, '0')}.${segundos.toString().padStart(2, '0')}`;
   };
+
   
   return (
     <View style={styles.container}>
@@ -50,11 +52,11 @@ export default function Home() {
      <View style={styles.buttons}> 
 
       <Pressable style={styles.button} onPress={iniciar}>
-      <Ionicons name="play-outline" size={45} color={"black"}/>
+      <Ionicons name={ativo ? "play" : "play-outline"} size={45} color={"black"}/>
       </Pressable>
 
       <Pressable style={styles.button} onPress={pausar}> 
-      <Ionicons name="pause-outline" size={45} color={"black"}/>
+      <Ionicons name={ativo ? "pause-outline" : "pause"} size={45} color={"black"}/>
       </Pressable>
 
       <Pressable style={styles.button} onPress={resetar}> 
