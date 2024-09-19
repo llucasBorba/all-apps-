@@ -39,7 +39,7 @@ export default function Root() {
      </View>
 
       <Pressable onPress={reset} style={styles.button} >
-       <Ionicons name="sync" size={32} color={"black"}/>
+       <Ionicons name="sync" size={70} color={"black"}/>
         </Pressable>
 
 
@@ -69,7 +69,7 @@ export default function Root() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'lightblue',
+    backgroundColor: "white",
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -85,11 +85,6 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 35,
-    elevation: 3,
-    backgroundColor: 'white',
-    borderColor:"black",
-    borderWidth: "1px",
-
   },
   number: { 
     fontSize: 330
