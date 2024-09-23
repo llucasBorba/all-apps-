@@ -5,7 +5,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 export default function Timer() {
   const [tempo, setTempo] = useState(0); 
   const [ativo, setAtivo] = useState(false);
-  const rotation = useRef(new Animated.Value(0)).current; 
+  const rotation = useRef(new Animated.Value(0.5)).current; 
 
   const startRotation = () => {
     Animated.timing(rotation, {
@@ -13,7 +13,7 @@ export default function Timer() {
       duration: 1000, 
       useNativeDriver: true,
     }).start(() => {
-      rotation.setValue(0);
+      rotation.setValue(0.5);
     });
   };
 
