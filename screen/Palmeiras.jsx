@@ -16,7 +16,10 @@ export default function Palmeiras() {
     try {
       const response = await ConsumirApi("https://stoic.tekloon.net/stoic-quote");
       const originalQuote = response.data.quote;
-      setAuthor(response.data.author);
+
+      if(!response.data.author){
+        setAuthor("Desconhecido");
+      }else setAuthor(response.data.author);
       
      // const translatedQuote = await Traduzir(originalQuote, apiKey);
       setQuote(originalQuote);

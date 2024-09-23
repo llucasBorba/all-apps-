@@ -6,7 +6,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 export default function Root() {
 
   const [count, setCount] = useState(0);
-  const rotation = useRef(new Animated.Value(3)).current; 
+  const rotation = useRef(new Animated.Value(0.5)).current; 
 
   const startRotation = () => {
     Animated.timing(rotation, {
@@ -14,7 +14,7 @@ export default function Root() {
       duration: 1000, 
       useNativeDriver: true,
     }).start(() => {
-      rotation.setValue(3);
+      rotation.setValue(0.5);
     });
   };
 
@@ -23,8 +23,7 @@ export default function Root() {
     outputRange: ['0deg', '360deg'],
   });
 
-  const animatedStyle = {
-    transform: [{ rotate: rotateInterpolate }],
+  const animatedStyle = { transform: [{ rotate: rotateInterpolate }],
   };
 
   const increment = () => {
@@ -63,7 +62,7 @@ export default function Root() {
           startRotation(); // Inicia a rotação
         }}>
         <Animated.View style={animatedStyle}>
-          <Ionicons name="sync" size={70} color={"black"} />
+          <Ionicons name="sync" size={60} color={"black"} />
         </Animated.View>
       </Pressable>
 
@@ -111,7 +110,7 @@ const styles = StyleSheet.create({
     borderRadius: 35,
   },
   number: { 
-    fontSize: 330
+    fontSize: 300
   },
   invisibleButton: {
     position: "absolute",

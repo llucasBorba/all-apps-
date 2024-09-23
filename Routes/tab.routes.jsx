@@ -1,9 +1,12 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 import Home from "../screen/Home";
 import Test from "../screen/Test";
 import Palmeiras from "../screen/Palmeiras";
+import Cookie from "../screen/Cookie";
+
 
 const Tab = createBottomTabNavigator(); 
 
@@ -53,6 +56,25 @@ export default function TabsRoutes(){
                 tabBarIcon: ({focused}) => (
                     <Ionicons 
                     name={focused ? "bookmark" : "bookmark-outline"} 
+                    size={22} 
+                    color={"black"} />),
+                    tabBarLabelStyle: ({ focused }) => ({
+                        fontWeight: focused ? 'bold' : 'normal',
+                    }),
+                    tabBarInactiveTintColor: 'gray',
+                    tabBarActiveTintColor: 'black'
+
+            }}
+            />
+
+        <Tab.Screen
+            name="COOKIE"
+            color="black"
+            component={Cookie}
+            options={{
+                tabBarIcon: ({focused}) => (
+                    <MaterialCommunityIcons 
+                    name={focused ? "cookie" : "cookie-outline"} 
                     size={22} 
                     color={"black"} />),
                     tabBarLabelStyle: ({ focused }) => ({
