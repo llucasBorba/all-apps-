@@ -9,7 +9,6 @@ import Traduzir from '../service/Traduzir';
 export default function Citacao() {
   const [quote, setQuote] = useState("");
   const [author, setAuthor] = useState("");
-  const apiKey = "3d67cb61-e50e-472a-9b8e-fb24f1a2f5de:fx";
   const rotation = useRef(new Animated.Value(0)).current; 
 
   const fetchQuote = async () => {
