@@ -3,7 +3,7 @@ import { Button, Pressable, StyleSheet, Text, View, Animated } from 'react-nativ
 import { useRef, useState } from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-export default function Root() {
+export default function Counter() {
 
   const [count, setCount] = useState(0);
   const rotation = useRef(new Animated.Value(0.5)).current; 

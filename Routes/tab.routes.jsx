@@ -2,9 +2,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
-import Home from "../screen/Home";
-import Test from "../screen/Test";
-import Palmeiras from "../screen/Palmeiras";
+import Home from "../screen/Timer";
+import Test from "../screen/Counter";
+import Palmeiras from "../screen/Citacao";
 import Cookie from "../screen/Cookie";
 
 

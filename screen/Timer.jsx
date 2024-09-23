@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet, Text, View, Animated } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-export default function Home() {
+export default function Timer() {
   const [tempo, setTempo] = useState(0); 
   const [ativo, setAtivo] = useState(false);
   const rotation = useRef(new Animated.Value(0)).current; 
